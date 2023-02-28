@@ -2,8 +2,10 @@
 
 PSQL="psql --username=freecodecamp --dbname=periodic_table -t --no-align -c"
 
-echo "Please provide an element as an argument."
-read ELEMENT
+echo "Please provide an element as an argument." 
+
+#read ELEMENT
+ELEMENT=$1
 
 # switch between number and string
 re='^[0-9]+$'
