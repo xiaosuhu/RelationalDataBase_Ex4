@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PSQL="psql --username=freecodecamp --dbname=periodic_table -t --no-align -c"
+PSQL="psql -X --username=freecodecamp --dbname=periodic_table -t -c"
 
 #read ELEMENT
 ELEMENT=$1
@@ -14,9 +14,9 @@ else
   re='^[0-9]+$'
   if [[ $ELEMENT =~ $re ]]
   then
-    ELEMENT_INFO=$($PSQL "select atomic_number, symbol, name, atomic_mass,melting_point_celsius,boiling_point_celsius, type from elements inner join properties using(atomic_number) inner join types using (type_id) where atomic_number=$ELEMENT")
+    ELEMENT_INFO=$($PSQL "select atomic_number, symbol, name, atomic_mass, melting_point_celsius, boiling_point_celsius, type from elements inner join properties using(atomic_number) inner join types using (type_id) where atomic_number=$ELEMENT")
   else
-    ELEMENT_INFO=$($PSQL "select atomic_number, symbol, name, atomic_mass,melting_point_celsius,boiling_point_celsius, type from elements inner join properties using(atomic_number) inner join types using (type_id) where symbol='$ELEMENT' or name='$ELEMENT'")
+    ELEMENT_INFO=$($PSQL "select atomic_number, symbol, name, atomic_mass, melting_point_celsius, boiling_point_celsius, type from elements inner join properties using(atomic_number) inner join types using (type_id) where symbol='$ELEMENT' or name='$ELEMENT'")
   fi
 
   if [[ -z $ELEMENT_INFO ]]
